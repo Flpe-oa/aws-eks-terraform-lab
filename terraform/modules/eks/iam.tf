@@ -1,4 +1,4 @@
-# Assume Role Control Plane
+# Cluster Role
 resource "aws_iam_role" "eks_cluster" {
   name = "${var.cluster_name}-cluster-role"
 
@@ -19,13 +19,13 @@ resource "aws_iam_role" "eks_cluster" {
   })
 }
 
-# Anexando policy ao role do cluster EKS
+# Policy para permitir que o EKS gerencie recursos da AWS em nome do cluster
 resource "aws_iam_role_policy_attachment" "eks_cluster" {
   role       = aws_iam_role.eks_cluster.name
   policy_arn = "arn:aws:iam::aws:policy/AmazonEKSClusterPolicy"
 }
 
-# Assume Role Node Group
+# Node Role
 resource "aws_iam_role" "eks_node" {
   name = "${var.cluster_name}-node-role"
 

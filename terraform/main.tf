@@ -10,3 +10,10 @@ module "vpc" {
     b = "us-east-1b"
   }
 }
+
+module "eks" {
+  source = "./modules/eks"
+
+  cluster_name      = var.cluster_name
+  private_subnet_ids = module.vpc.private_subnet_ids
+}
